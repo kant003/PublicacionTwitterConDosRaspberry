@@ -1,0 +1,25 @@
+{
+  "name": "publicaciontwittercondosraspberry",
+  "version": "1.0.0",
+  "description": "Aplicación que publica un mensaje/foto en Twitter usando 2 Raspberry PI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kant003/PublicacionTwitterConDosRaspberry.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kant003/PublicacionTwitterConDosRaspberry/issues"
+  },
+  "homepage": "https://github.com/kant003/PublicacionTwitterConDosRaspberry#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1"
+  }
+}
