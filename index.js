@@ -11,7 +11,7 @@ path = require('path');
 Twit = require('twit');
 
 
-config = require('./config');
+var config = require('./config');
 
 //var Twitter = require('twitter');
 var express = require('express');
@@ -19,7 +19,7 @@ var app = express();
 
 var bodyParser = require("body-parser");
 
-var port = 7778
+var port = 7777
 app.use(bodyParser.urlencoded( {extended:false} ) )
 app.use( bodyParser.json() )
 
@@ -34,6 +34,8 @@ app.use( (req, res, next) => {
 	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE')
 	next(); // para que se salga de esta función
 })
+
+var T = new Twit(config);
 
 function upload(){
     console.log('Opening an image...');
@@ -77,45 +79,34 @@ const myCamera = new PiCamera({
   nopreview: true,
 });
 
-myCamera.snap()
-  .then((result) => {
-    // Your picture was captured
-    console.log("OK",result)
 
-    upload()
 
-  })
-  .catch((error) => {
-     // Handle your error
-	console.log(error)
-  });
 
-/*var T = new Twit(config);
 
-T.post('statuses/update', { status: 'Hola!!!' }, function(err, data, response) {
+/*T.post('statuses/update', { status: 'Hola!!!' }, function(err, data, response) {
   console.log(data)
 });*/
 
-/*var twclient = new Twitter(config);
-var usuario = {
-    // en screen_name, pones el nombre de usuario sin la arroba.
-    screen_name: 'pedromiguelpimienta', 
-    // la cantidad de mensajes a obtener
-    count: 1,
-    // solo mensajes propios (no re-tweets) 
-    include_rts: false
-}; 
 
-twclient.get('statuses/user_timeline', usuario, function(error, tweets, response){
-if(error) throw error; // se produjo un error, manejar aquí
-
-if (tweets.length) {
-  console.log(tweets[0].text);  // el texto del ultimo twit, si hay alguno
-}
-});*/
 
 app.get('/sacafoto', (req, res)=>{
-	res.status(200).send("Foto sacada y publicada")
+
+	myCamera.snap()
+	  .then((result) => {
+	    // Your picture was captured
+	    console.log("OK",result)
+	
+	    upload()
+		
+	
+	  })
+	  .catch((error) => {
+	     // Handle your error
+		console.log(error)
+	res.status(500).send("Fallo al sacar la foto")
+  });
+
+	
 });
 
 
