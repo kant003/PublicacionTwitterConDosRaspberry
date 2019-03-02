@@ -34,7 +34,7 @@ app.use( (req, res, next) => {
 	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE')
 	next(); // para que se salga de esta función
 })
-
+var T = new Twit(config);
 function upload(){
     console.log('Opening an image...');
     var image_path = path.join('test.jpg'),
@@ -90,9 +90,9 @@ myCamera.snap()
 	console.log(error)
   });
 
-/*var T = new Twit(config);
 
-T.post('statuses/update', { status: 'Hola!!!' }, function(err, data, response) {
+
+/*T.post('statuses/update', { status: 'Hola!!!' }, function(err, data, response) {
   console.log(data)
 });*/
 
