@@ -39,7 +39,7 @@ app.use( (req, res, next) => {
 const PiCamera = require('pi-camera');
 const myCamera = new PiCamera({
   mode: 'photo',
-  output: `${ __dirname }/test.jpg`,
+  output: `test.jpg`,
   width: 640,
   height: 480,
   nopreview: true,
@@ -52,6 +52,7 @@ myCamera.snap()
   })
   .catch((error) => {
      // Handle your error
+	console.log(error)
   });
 
 /*var T = new Twit(config);
