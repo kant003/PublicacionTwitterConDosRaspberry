@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "gpio": "^0.2.10",
     "pi-camera": "^1.2.1",
     "twit": "^2.2.11",
     "twitter": "^1.7.1"
