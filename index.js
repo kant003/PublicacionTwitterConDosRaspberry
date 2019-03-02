@@ -35,6 +35,38 @@ app.use( (req, res, next) => {
 	next(); // para que se salga de esta función
 })
 
+function upload(){
+    console.log('Opening an image...');
+    var image_path = path.join('test.jpg'),
+        b64content = fs.readFileSync(image_path, { encoding: 'base64' });
+  
+    console.log('Uploading an image...');
+  
+    T.post('media/upload', { media_data: b64content }, function (err, data, response) {
+      if (err){
+        console.log('ERROR:');
+        console.log(err);
+      }
+      else{
+        console.log('Image uploaded!');
+        console.log('Now tweeting it...');
+  
+        T.post('statuses/update', {
+            media_ids: new Array(data.media_id_string)
+          },
+          function(err, data, response) {
+            if (err){
+              console.log('ERROR:');
+              console.log(err);
+            }
+            else{
+              console.log('Posted an image!');
+            }
+          }
+        );
+      }
+    });
+  }
 
 const PiCamera = require('pi-camera');
 const myCamera = new PiCamera({
@@ -48,7 +80,10 @@ const myCamera = new PiCamera({
 myCamera.snap()
   .then((result) => {
     // Your picture was captured
-    console.log(result)
+    console.log("OK",result)
+
+    upload()
+
   })
   .catch((error) => {
      // Handle your error
